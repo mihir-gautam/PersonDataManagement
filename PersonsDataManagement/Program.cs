@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace PersonsDataManagement
 {
@@ -11,8 +12,9 @@ namespace PersonsDataManagement
             Console.WriteLine("Welcome to Person Data Management Program");
             List<Person> listPersonInCity = new List<Person>();
             AddRecords(listPersonInCity);
-            Retrieving_TopTwoRecord_ForAgels_LessThanSixty(listPersonInCity);
+            RetrievingTopTwoRecordForAgeLessThanSixty(listPersonInCity);
             CheckingForTeenagerPerson(listPersonInCity);
+            RetrievingAverageAge(listPersonInCity);
             Console.ReadKey();
         }
         private static void AddRecords(List<Person> listPersonInCity)
@@ -28,7 +30,7 @@ namespace PersonsDataManagement
             listPersonInCity.Add(new Person("203456883", "Mac", "126 Province Ave, Baltimore,NY", 85));
             listPersonInCity.Add(new Person("203456884", "SAM", "126 Province Ave, Baltimore,NY", 95));
         }
-        public static void Retrieving_TopTwoRecord_ForAgels_LessThanSixty(List<Person> listPersonsInCity)
+        public static void RetrievingTopTwoRecordForAgeLessThanSixty(List<Person> listPersonsInCity)
         {
             foreach (Person person in listPersonsInCity.FindAll(e => (e.Age < 60)).Take(2).ToList())
             {
@@ -45,6 +47,10 @@ namespace PersonsDataManagement
             {
                 Console.WriteLine("No, we don't have teenagers in the list");
             }
+        }
+        public static void RetrievingAverageAge(List<Person> listPersonsInCity)
+        {
+            Console.WriteLine("Average age = "+ listPersonsInCity.Average(e => e.Age));
         }
     }
 }
