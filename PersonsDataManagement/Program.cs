@@ -17,6 +17,7 @@ namespace PersonsDataManagement
             RetrievingAverageAge(listPersonInCity);
             CheckForSpecificName(listPersonInCity);
             SkipRecordOfAgeLessThan60(listPersonInCity);
+            RemoveSpecificName(listPersonInCity);
             Console.ReadKey();
         }
         private static void AddRecords(List<Person> listPersonInCity)
@@ -73,6 +74,21 @@ namespace PersonsDataManagement
             foreach (Person person in listPersonInCity.FindAll(e => (e.Age >= 60)))
             {
                 Console.WriteLine("Name :" + person.Name + "\t\tAge: " + person.Age);
+            }
+        }
+        public static void RemoveSpecificName(List<Person> listPersonInCity)
+        {
+            Console.WriteLine("Enter the name of person you want to remove from in the list: ");
+            string name = Console.ReadLine();
+            var found = listPersonInCity.Find(e => e.Name == name);
+            if (found != null)
+            {
+                listPersonInCity.Remove(found);
+                Console.WriteLine("Person {0} have been removed from the list", name);
+            }
+            else
+            {
+                Console.WriteLine("we do not have {0} in the list", name);
             }
         }
     }
