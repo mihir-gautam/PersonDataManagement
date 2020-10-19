@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PersonsDataManagement
 {
@@ -10,6 +11,7 @@ namespace PersonsDataManagement
             Console.WriteLine("Welcome to Person Data Management Program");
             List<Person> listPersonInCity = new List<Person>();
             AddRecords(listPersonInCity);
+            Retrieving_TopTwoRecord_ForAgels_LessThanSixty(listPersonInCity);
         }
         private static void AddRecords(List<Person> listPersonInCity)
         {
@@ -23,6 +25,13 @@ namespace PersonsDataManagement
             listPersonInCity.Add(new Person("203456882", "Winston", "1208 Alex st, Newyork,NY", 65));
             listPersonInCity.Add(new Person("203456883", "Mac", "126 Province Ave, Baltimore,NY", 85));
             listPersonInCity.Add(new Person("203456884", "SAM", "126 Province Ave, Baltimore,NY", 95));
+        }
+        public static void Retrieving_TopTwoRecord_ForAgels_LessThanSixty(List<Person> listPersonsInCity)
+        {
+            foreach (Person person in listPersonsInCity.FindAll(e => (e.Age < 60)).Take(2).ToList())
+            {
+                Console.WriteLine("Name :" + person.Name + "\t\tAge: " + person.Age);
+            }
         }
     }
 }
