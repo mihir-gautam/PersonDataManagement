@@ -15,6 +15,7 @@ namespace PersonsDataManagement
             RetrievingTopTwoRecordForAgeLessThanSixty(listPersonInCity);
             CheckingForTeenagerPerson(listPersonInCity);
             RetrievingAverageAge(listPersonInCity);
+            CheckForSpecificName(listPersonInCity);
             Console.ReadKey();
         }
         private static void AddRecords(List<Person> listPersonInCity)
@@ -30,9 +31,9 @@ namespace PersonsDataManagement
             listPersonInCity.Add(new Person("203456883", "Mac", "126 Province Ave, Baltimore,NY", 85));
             listPersonInCity.Add(new Person("203456884", "SAM", "126 Province Ave, Baltimore,NY", 95));
         }
-        public static void RetrievingTopTwoRecordForAgeLessThanSixty(List<Person> listPersonsInCity)
+        public static void RetrievingTopTwoRecordForAgeLessThanSixty(List<Person> listPersonInCity)
         {
-            foreach (Person person in listPersonsInCity.FindAll(e => (e.Age < 60)).Take(2).ToList())
+            foreach (Person person in listPersonInCity.FindAll(e => (e.Age < 60)).Take(2).ToList())
             {
                 Console.WriteLine("Name :" + person.Name + "\t\tAge: " + person.Age);
             }
@@ -48,9 +49,22 @@ namespace PersonsDataManagement
                 Console.WriteLine("No, we don't have teenagers in the list");
             }
         }
-        public static void RetrievingAverageAge(List<Person> listPersonsInCity)
+        public static void RetrievingAverageAge(List<Person> listPersonInCity)
         {
-            Console.WriteLine("Average age = "+ listPersonsInCity.Average(e => e.Age));
+            Console.WriteLine("Average age = "+ listPersonInCity.Average(e => e.Age));
+        }
+        public static void CheckForSpecificName(List<Person> listPersonInCity)
+        {
+            Console.WriteLine("Enter the name of person you want to check in the list: ");
+            string name = Console.ReadLine();
+            if (listPersonInCity.Any(e => e.Name == name))
+            {
+                Console.WriteLine("Yes, We have {0} in the list",name);
+            }
+            else
+            {
+                Console.WriteLine("No, we don't have {0} in the list",name);
+            }
         }
     }
 }
